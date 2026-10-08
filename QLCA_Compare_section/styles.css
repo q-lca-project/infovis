@@ -1,0 +1,1133 @@
+/* =====================================================
+   FONTS
+===================================================== */
+
+@font-face {
+
+    font-family: "Inter";
+
+    src: url("fonts/Inter-Light.woff2")
+         format("woff2");
+
+    font-weight: 300;
+
+    font-style: normal;
+
+}
+
+
+@font-face {
+
+    font-family: "Inter";
+
+    src: url("fonts/Inter-Regular.woff2")
+         format("woff2");
+
+    font-weight: 400;
+
+    font-style: normal;
+
+}
+
+
+@font-face {
+
+    font-family: "Inter";
+
+    src: url("fonts/Inter-Medium.woff2")
+         format("woff2");
+
+    font-weight: 500;
+
+    font-style: normal;
+
+}
+
+@font-face {
+
+    font-family: "Inter";
+
+    src: url("fonts/Inter-SemiBold.woff2")
+         format("woff2");
+
+    font-weight: 600;
+
+    font-style: normal;
+
+}
+
+@font-face {
+
+    font-family: "Inter";
+
+    src: url("fonts/Inter-Bold.woff2")
+         format("woff2");
+
+    font-weight: 700;
+
+    font-style: normal;
+
+}
+
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+html {
+    background-color: #FDFDFD;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Inter', Helvetica, sans-serif;
+    overflow: hidden;
+    background-color: #FDFDFD;
+}
+
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
+
+.dashboard {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 30% 70%;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.restart-story-link {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    z-index: 900;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.restart-story-link__icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.restart-story-link:hover {
+    color: #555555;
+}
+
+/* =====================================================
+   INTRO MODAL
+===================================================== */
+
+.intro-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.45);
+
+}
+
+
+/* CONTENT */
+
+.intro-modal-content {
+
+    position: relative;
+
+    width: 350px;
+
+    max-width: calc(100vw - 40px);
+
+    max-height: calc(100vh - 40px);
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+
+    padding: 70px 50px 50px 50px;
+
+    background: #ffffff;
+
+    border: 1px solid #222;
+
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.20);
+
+}
+
+
+
+.intro-modal-content h2 strong {
+
+    font-weight: 700;
+
+}
+
+
+/* TEXT */
+
+.intro-modal-content p {
+
+    margin: 0 0 20px 0;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color: #222;
+
+}
+
+
+.intro-modal-content p strong {
+
+    font-weight: 700;
+
+}
+
+
+/* CLOSE BUTTON */
+
+.intro-modal-close {
+
+    position: absolute;
+
+    top: 16px;
+
+    right: 22px;
+
+    width: 40px;
+
+    height: 40px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #111;
+
+    font-size: 42px;
+
+    font-weight: 300;
+
+    line-height: 36px;
+
+    cursor: pointer;
+
+}
+
+
+.intro-modal-close:hover {
+
+    color: #666;
+
+}
+
+
+
+/* =====================================================
+   Neighbourhood
+===================================================== */
+
+
+.change-neighbourhood {
+    position: absolute;
+
+    right: 40px;
+    top: 75%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    background: transparent;
+    padding: 0;
+
+    z-index: 100;
+}
+
+/* =====================================================
+   LEFT COLUMN
+===================================================== */
+
+
+.title {
+
+    margin-bottom: 10px;
+
+}
+
+.title h1 {
+
+    font-size: 2.5rem;
+
+    line-height: 1.2;
+
+}
+
+
+#absoluteChart {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 0;
+}
+
+
+
+.metric {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.metric strong {
+    display: block;
+
+    font-size: 40px;
+    line-height: 1.05;
+    font-weight: 700;
+
+    margin-bottom: 4px;
+}
+
+.metric span {
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    color: #666;
+}
+
+
+/* =====================================================
+   UNIT TOGGLE
+===================================================== */
+
+.unit-toggle {
+    display: flex;
+    width: fit-content;
+}
+
+.unit-button {
+    width: 80px;
+    height: 35px;
+
+    background: white;
+    color: black;
+
+    border: 2px solid black;
+
+    font-family: inherit;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+/* Left button */
+
+.unit-button:first-child {
+    border-radius: 2px 0 0 2px;
+}
+
+/* Right button */
+
+.unit-button:last-child {
+    border-radius: 0 2px 2px 0;
+
+    margin-left: -2px;
+}
+
+/* Active button */
+
+.unit-button.active {
+    background: black;
+    color: white;
+}
+
+
+/* HIGHEST COMPONENT */
+
+.highest-component {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 15px 0;
+}
+
+.highest-component p {
+    margin-bottom: 6px;
+    font-size: 18px;
+}
+
+#highestComponent {
+    color: #10B61D;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+
+
+/* FIGURES */
+
+.figures {
+    margin-bottom: 20px;
+
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.figure {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+
+/* ==========================
+   FACTOR OVERVIEW
+========================== */
+
+.factor-overview {
+    margin-top: 5px;
+}
+
+.factor-overview h3 {
+    margin-bottom: 18px;
+}
+
+
+/* ==========================
+   FACTOR ICONS
+========================== */
+
+.factors {
+    display: grid;
+
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: repeat(2, 50px);
+
+    column-gap: 20px;
+    row-gap: 18px;
+
+    justify-content: start;
+    align-items: center;
+}
+
+
+.factors img {
+    width: 50px;
+    height: 50px;
+
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   FACTOR OVERVIEW BUTTON
+===================================================== */
+
+.factor-overview-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 20px;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 14px;
+    color: #222;
+
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+
+/* Info Icon */
+
+.factor-info-icon {
+
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+    color: white;
+
+    font-size: 18px;
+    line-height: 1;
+}
+
+.factor-overview-trigger-label {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.factor-overview-button:hover .factor-overview-trigger-label {
+    text-decoration-thickness: 2px;
+}
+
+/* Text */
+
+.factor-overview-button > span:last-child {
+
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+
+/* Hover */
+
+.factor-overview-button:hover > span:last-child {
+
+    text-decoration-thickness: 2px;
+
+}
+
+
+/* =====================================================
+   FACTOR OVERVIEW MODAL
+===================================================== */
+
+.factor-modal {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    background: rgba(0, 0, 0, 0.35);
+
+}
+
+
+/* =====================================================
+   MODAL VISIBLE
+===================================================== */
+
+.factor-modal.active {
+
+    display: block;
+
+}
+
+
+/* =====================================================
+   MODAL CONTENT
+===================================================== */
+
+.factor-modal-content {
+
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+    bottom: 15px;
+
+    width: 640px;
+
+    max-width: calc(100vw - 16px);
+
+    background: #ffffff;
+
+    border: 1px solid #222;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        -8px 0 30px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* =====================================================
+   HEADER (sticky)
+===================================================== */
+
+.factor-modal-header {
+
+    flex: 0 0 auto;
+
+    padding: 48px 70px 25px 70px;
+
+}
+
+
+.factor-modal-header h2 {
+
+    margin: 0;
+
+    font-size: 2.5rem;
+
+    line-height: 1.1;
+
+    font-weight: 400;
+
+}
+
+
+.factor-modal-header h2 strong {
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   SCROLLABLE BODY
+===================================================== */
+
+.factor-modal-body {
+
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    padding:
+        10px 70px 60px 70px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.factor-modal-body {
+
+    scrollbar-width: auto;
+
+}
+
+
+.factor-modal-body::-webkit-scrollbar {
+
+    width: 9px;
+
+}
+
+
+.factor-modal-body::-webkit-scrollbar-track {
+
+    background: transparent;
+
+}
+
+
+.factor-modal-body::-webkit-scrollbar-thumb {
+
+    background: #999;
+
+    border-radius: 5px;
+
+}
+
+
+.factor-modal-body::-webkit-scrollbar-thumb:hover {
+
+    background: #777;
+
+}
+
+
+/* =====================================================
+   FACTOR SECTION
+===================================================== */
+
+.factor-section {
+
+    margin-bottom: 38px;
+
+}
+
+
+.factor-section:last-child {
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =====================================================
+   ICON ROW
+===================================================== */
+
+.factor-icons {
+
+    display: flex;
+
+    gap: 12px;
+
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 8px;
+
+}
+
+/* =====================================================
+   SECOND ICON ROW
+===================================================== */
+
+.factor-label-icons {
+
+    display: flex;
+
+    gap: 12px;
+
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 16px;
+
+}
+
+
+.factor-label-icons img {
+
+    display: block;
+
+    width: 50px;
+
+    height: 50px;
+
+    object-fit: contain;
+
+}
+
+
+/* =====================================================
+   INDIVIDUAL FACTOR
+===================================================== */
+
+.factor-item {
+
+    width: 50px;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+   PNG ICON
+===================================================== */
+
+.factor-item img {
+
+    display: block;
+
+    width: 50px;
+
+    height: 50px;
+
+    object-fit: contain;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+/* =====================================================
+   FACTOR LABEL
+===================================================== */
+
+.factor-item div {
+
+    font-size: 16px;
+
+    line-height: 1.2;
+
+    font-weight: 400;
+
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.factor-section p {
+
+    margin: 0;
+
+    font-size: 16px;
+
+    line-height: 1.55;
+
+    color: #222;
+
+}
+
+
+.factor-section p strong {
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.factor-modal-close {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 34px;
+
+    z-index: 10;
+
+    width: 42px;
+
+    height: 42px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #111;
+
+    font-size: 46px;
+
+    font-weight: 300;
+
+    line-height: 38px;
+
+    cursor: pointer;
+
+}
+
+
+.factor-modal-close:hover {
+
+    color: #555;
+
+}
+
+
+
+
+/* =====================================================
+   RIGHT COLUMN
+===================================================== */
+
+
+.right-column {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: visible;
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   NEIGHBOURHOOD IMAGE
+===================================================== */
+
+
+.neighbourhood {
+
+    position: relative;
+
+    flex: 1;
+
+    min-height: 0;
+
+    width: 100%;
+
+    overflow: hidden;
+}
+
+
+.neighbourhood-image-container {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: visible;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+.neighbourhood-image {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 160%;
+    height: 100%;
+
+    object-fit: contain;
+    transition:
+        transform 1000ms cubic-bezier(0.22,1,0.36,1);
+}
+
+
+
+
+
+/* =====================================================
+   LEFT COLUMN
+===================================================== */
+
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    min-width: 0;
+    max-width: 481px;
+
+    padding: 40px 40px 40px 56px;
+
+    background: #FDFDFD;
+    border-right: none;
+
+    position: relative;
+    z-index: 20;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PARKING
+===================================================== */
+
+.parking-control {
+    position: absolute;
+
+    left: 15px;
+    bottom: 185px;
+
+    z-index: 100;
+}
+
+.parking-title {
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-size: 18px;
+}
+
+.parking-toggle {
+    display: flex;
+    width: fit-content;
+}
+
+.parking-button {
+    width: 80px;
+    height: 35px;
+
+    background: white;
+    color: black;
+
+    border: 2px solid black;
+
+    font-family: inherit;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+.parking-button:first-child {
+    border-radius: 2px 0 0 2px;
+}
+
+
+.parking-button:last-child {
+    border-radius: 0 2px 2px 0;
+
+    margin-left: -2px;
+}
+
+
+.parking-button.active {
+    background: black;
+    color: white;
+}
+
+
+/* =====================================================
+   CHANGE NEIGHBOURHOOD
+===================================================== */
+
+.change-neighbourhood {
+    position: absolute;
+
+    right: 95px;
+    bottom: 185px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    transform: translateY(-10px);
+
+    background: transparent;
+    padding: 0;
+
+    z-index: 100;
+}
+
+
+.change-neighbourhood.to-B {
+    flex-direction: row;
+}
+
+.change-neighbourhood.to-B span {
+    text-align: right;
+}
+
+
+.change-neighbourhood.to-A {
+    flex-direction: row-reverse;
+}
+
+.change-neighbourhood.to-A span {
+    text-align: left;
+}
+
+
+.change-neighbourhood span {
+    display: block;
+
+    font-size: 18px;
+    line-height: 1.2;
+
+    white-space: nowrap;
+
+    text-align: right;
+}
+
+.change-neighbourhood strong {
+    font-weight: 700;
+}
+
+
+.arrow-button {
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #000;
+
+    font-family: 'Inter', Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+/* =====================================================
+   STACKED BAR CHART
+===================================================== */
+
+.bottom-chart {
+    padding: 15px;
+    background: #FDFDFD;
+    border-top: none;
+}
+
+
+#percentChart {
+    position: relative;
+
+    top: -20px;
+
+    width: 100%;
+    height: 140px;
+
+    border: none;
+    background: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

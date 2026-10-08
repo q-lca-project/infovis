@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Scenario Comparison</title>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    background: linear-gradient(180deg, #EDEBEB 0%, #F5F5F5 50.48%);
+    font-family: "Inter", Helvetica, sans-serif;
+    color: #333;
+}
+
+svg {
+    border: 1px solid #eee;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Comparing urban scenarios</h1>
+<p>Cost group breakdown in % + absolute GWP in kg CO2-eq*a</p>
+
+<div id="chart"></div>
+
+<script>
+
+// -----------------------------
+// Data
+// -----------------------------
+
+const S1_blockData = [
+    { name: "KG300", value: 343250.9, color: "#3A86FF" },
+    { name: "KG400", value: 309050.1, color: "#FD2B3B" },
+    { name: "KG500", value: 183866, color: "#18AD24" },
+    { name: "B6", value: 293949, color: "#FFB20B" }
+];
+
+const S1_blockNoUPData = [
+    { name: "KG300", value: 343250.9, color: "#3A86FF" },
+    { name: "KG400", value: 309050.1, color: "#FD2B3B" },
+    { name: "KG500", value: 15122.0, color: "#18AD24" },
+    { name: "B6", value: 293949, color: "#FFB20B" }
+];
+
+const S1_efhData = [
+    { name: "KG300", value: 49325.9, color: "#3A86FF" },
+    { name: "KG400", value: 57042.8, color: "#FD2B3B" },
+    { name: "KG500", value: 17955, color: "#18AD24" },
+    { name: "B6", value: 25267, color: "#FFB20B" }
+];
+
+const S1_efhNoAPData = [
+    { name: "KG300", value: 49325.9, color: "#3A86FF" },
+    { name: "KG400", value: 57042.8, color: "#FD2B3B" },
+    { name: "KG500", value: 15304.2, color: "#18AD24" },
+    { name: "B6", value: 25267, color: "#FFB20B" }
+];
+
+const S2_rhData = [
+{ name: "KG300", value: 158896.3, color: "#3A86FF" },
+{ name: "KG400", value: 125371.0, color: "#FD2B3B" },
+{ name: "KG500", value: 29662, color: "#18AD24" },
+{ name: "B6", value: 58768, color: "#FFB20B" }
+];
+
+const S2_efhData = [
+    { name: "KG300", value: 103328.4, color: "#3A86FF" },
+    { name: "KG400", value: 69594.7, color: "#FD2B3B" },
+    { name: "KG500", value: 25799, color: "#18AD24" },
+    { name: "B6", value: 30209, color: "#FFB20B" }
+];
+
+const S2_efhOptData = [
+    { name: "KG300", value: 101573.2, color: "#3A86FF" },
+    { name: "KG400", value: 86313, color: "#FD2B3B" },
+    { name: "KG500", value: 26458, color: "#18AD24" },
+    { name: "B6", value: 44047, color: "#FFB20B" }
+];
+
+const S3_zhData = [
+    { name: "KG300", value: 291533.0, color: "#3A86FF" },
+    { name: "KG400", value: 224245.9, color: "#FD2B3B" },
+    { name: "KG500", value: 113472, color: "#18AD24" },
+    { name: "B6", value: 171246, color: "#FFB20B" }
+];
+
+const S3_zh50Data = [
+    { name: "KG300", value: 186420.39, color: "#3A86FF" },
+    { name: "KG400", value: 156378.66, color: "#FD2B3B" },
+    { name: "KG500", value: 113472, color: "#18AD24" },
+    { name: "B6", value: 28435.17, color: "#FFB20B" }
+];
+
+
+
+
+// -----------------------------
+// LAYOUT
+// -----------------------------
+
+
+const width = 900;
+
+// SVG
+const svg = d3.select("#chart")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", 1000);
+
+const g = svg.append("g")
+    .attr("transform", "translate(80,60)");
+
+const defs = svg.append("defs");
+
+// LAYOUT
+const percentWidth = width - 120;
+const absWidth = 324;
+
+const barH = 25;
+const absH = 25;
+
+// SCALES
+const xPct = d3.scaleLinear().domain([0,1]).range([0, percentWidth]);
+
+const minGWP = 97542;
+const maxGWP = 2891682;
+
+const xAbs = d3.scaleLinear()
+    .domain([minGWP, maxGWP])
+    .range([0, absWidth]);
+
+
+// -----------------------------
+// GRADIENT
+// -----------------------------
+
+const gradient = defs.append("linearGradient")
+  .attr("id", "absGradient")
+  .attr("x1", "0%")
+  .attr("x2", "100%")
+  .attr("y1", "0%")
+  .attr("y2", "0%");
+
+// left
+gradient.append("stop")
+  .attr("offset", "0%")
+  .attr("stop-color", "#DADADC");
+
+// middle
+gradient.append("stop")
+  .attr("offset", "50%")
+  .attr("stop-color", "#C7C7C7");
+
+// right
+gradient.append("stop")
+  .attr("offset", "100%")
+  .attr("stop-color", "#555555");
+
+
+
+
+// -----------------------------
+// Percent Stacked BAR
+// -----------------------------
+
+function drawPercentBar(g, data, y) {
+
+    const total = d3.sum(data, d => d.value);
+
+    let acc = 0;
+
+    const norm = data.map(d => {
+
+        const start = acc;
+
+        const p = d.value / total;
+
+        acc += p;
+
+        return {
+            ...d,
+            start,
+            end: acc,
+            percent: p * 100,
+            absolute: d.value
+        };
+
+    });
+
+
+    // -----------------------------
+    // STACKED BAR
+    // -----------------------------
+
+    g.selectAll(null)
+        .data(norm)
+        .join("rect")
+        .attr("x", d => xPct(d.start))
+        .attr("y", y)
+        .attr(
+            "width",
+            d => xPct(d.end) - xPct(d.start)
+        )
+        .attr("height", barH)
+        .attr("fill", d => d.color);
+
+
+    // -----------------------------
+    // PERCENTAGE LABELS
+    // -----------------------------
+
+    const labelGroup = g.append("g")
+        .attr("class", "percent-labels");
+
+    labelGroup
+        .selectAll("text")
+        .data(norm)
+        .join("text")
+        .attr("class", "percent-label")
+        .attr(
+            "x",
+            d => xPct(
+                d.start +
+                (d.end - d.start) / 2
+            )
+        )
+        .attr("y", y - 10)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("font-weight", "700")
+        .style("fill", d => d.color)
+        .text(d => d.percent.toFixed(1));
+
+
+    // -----------------------------
+    // COST GROUP LABELS
+    // -----------------------------
+
+    const labels = [
+        {
+            text: "Building",
+            color: "#3A86FF"
+        },
+        {
+            text: "Building services",
+            color: "#FD2B3B"
+        },
+        {
+            text: "Infrastructure",
+            color: "#18AD24"
+        },
+        {
+            text: "Operational energy",
+            color: "#FFB20B"
+        }
+    ];
+
+    const labelY = y + barH + 20;
+
+    labels.forEach((d, i) => {
+
+        const x =
+            (i / (labels.length - 1)) *
+            percentWidth;
+
+        g.append("text")
+            .attr("x", x)
+            .attr("y", labelY)
+            .attr(
+                "text-anchor",
+                i === 0
+                    ? "start"
+                    : i === labels.length - 1
+                        ? "end"
+                        : "middle"
+            )
+            .style("font-size", "14px")
+            .style("fill", d.color)
+            .text(d.text);
+
+    });
+
+}
+
+// -----------------------------
+// ABSOLUTE BAR
+// -----------------------------
+
+function drawAbsoluteBar(g, data, y) {
+
+    const total = d3.sum(data, d => d.value);
+    const avg = (minGWP + maxGWP) / 2;
+
+    // background
+    g.append("rect")
+        .attr("x", 0)
+        .attr("y", y)
+        .attr("width", absWidth)
+        .attr("height", absH)
+        .attr("fill", "url(#absGradient)");
+
+    // marker
+    g.append("line")
+        .attr("x1", xAbs(total))
+        .attr("x2", xAbs(total))
+        .attr("y1", y)
+        .attr("y2", y + absH)
+        .attr("stroke", "#111")
+        .attr("stroke-width", 4);
+
+    // value
+    const title = g.append("text")
+        .attr("x", 0)
+        .attr("y", y - 25); 
+
+    // "Total GWP" + value (bold)
+    title.append("tspan")
+        .style("font-size", "16px")
+        .style("font-weight", "700")
+        .text(`${Math.round(total).toLocaleString("de-DE")} `);
+
+    title.append("tspan")
+        .style("font-size", "16px")
+        .style("font-weight", "700")
+        .text(`Total GWP`);
+
+    // unit (light)
+    title.append("tspan")
+        .attr("x", 0)
+        .attr("dy", "1.6em")
+        .style("font-size", "11px")
+        .style("font-weight", "400")
+        .style("fill", "#666")
+        .text("in kg CO₂-eq*a");
+
+    // min / max
+    g.append("text")
+        .attr("x", 0)
+        .attr("y", y + absH + 18)
+        .style("font-size", "14px")
+        .text("Min");
+
+    g.append("text")
+        .attr("x", absWidth)
+        .attr("y", y + absH + 18)
+        .attr("text-anchor", "end")
+        .style("font-size", "14px")
+        .text("Max");
+
+    // average marker
+    g.append("text")
+        .attr("x", xAbs(avg))
+        .attr("y", y + absH + 18)
+        .style("font-size", "14px")
+        .attr("text-anchor", "middle")
+        .style("font-weight", "600")
+        .text("∅");
+    
+}
+
+
+// -----------------------------
+// Render Bar charts
+// -----------------------------
+
+
+drawPercentBar(g, S1_blockData, 0);
+
+drawAbsoluteBar(g, S1_blockData, 100);
+
+drawPercentBar(g, S1_blockNoUPData, 200);
+
+drawAbsoluteBar(g, S1_blockNoUPData, 300);
+
+drawPercentBar(g, S1_efhData, 400);
+
+drawAbsoluteBar(g, S1_efhData, 500);
+
+drawPercentBar(g, S1_efhNoAPData, 600);
+
+drawAbsoluteBar(g, S1_efhNoAPData, 700);
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Urban Form & Private Parking</title>
+
+     <!-- D3 -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script defer src="script.js"></script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+   <a
+        class="restart-story-link"
+        href="../index.html#intro"
+        aria-label="Restart story">
+        <img
+            class="restart-story-link__icon"
+            src="SVGS/arrow_left.svg"
+            alt="">
+        <span>Restart Story</span>
+    </a>
+
+    <!-- ===================================================== -->
+    <!-- INTRO POPUP                                           -->
+    <!-- ===================================================== -->
+
+    <div
+        id="introModal"
+        class="intro-modal">
+
+        <div class="intro-modal-content">
+
+            <button
+                id="introModalClose"
+                class="intro-modal-close"
+                aria-label="Close">
+                ×
+            </button>
+
+
+            <p>
+                Explore the <strong>neighbourhood results</strong> 
+                through different <strong>GWP perspectives</strong>, 
+                including total impact, per-area and per-capita 
+                values, and 
+                cost group contributions.
+            </p>
+
+            <p>
+                <strong>Private parking</strong> can be included or excluded 
+                to assess its influence on the overall GWP.
+            </p>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- LEFT COLUMN                                       -->
+    <!-- ================================================= -->
+
+    <aside class="left-column">
+
+        <!-- Title -->
+
+        <section class="title">
+
+            <h1>Urban Form &<br>Private Parking</h1>
+
+        </section>
+
+
+        <!-- Total GWP -->
+
+        <section class="total-gwp">
+
+            <div id="absoluteChart"></div>
+
+            <!-- Metric -->
+            <div class="metric">
+
+                <strong id="metricValue">
+                    13.36 GWP
+                </strong>
+
+                <span id="metricUnit">
+                    in kg CO₂-eq per m² NFA *a
+                </span>
+
+            </div>
+
+            <!-- Unit Toggle -->
+            <div class="unit-toggle">
+
+                <button
+                    id="unitM2"
+                    class="unit-button active">
+                    m²
+                </button>
+
+                <button
+                    id="unitCapita"
+                    class="unit-button">
+                    capita
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Highest Component -->
+
+        <section class="highest-component">
+
+            <p>Component with highest GWP</p>
+
+            <strong id="highestComponent">
+                Underground garages
+            </strong>
+
+        </section>
+
+
+        <!-- Figures -->
+
+        <section class="figures">
+
+            <div class="figure">
+                <span>Population</span>
+                <span id="populationValue">1729</span>
+            </div>
+
+            <div class="figure">
+                <span>Buildings</span>
+                <span id="buildingsValue">7</span>
+            </div>
+
+            <div class="figure">
+                <span>Hectares</span>
+                <span id="hectaresValue">6</span>
+            </div>
+
+        </section>
+
+
+        <!-- Factor Overview -->
+
+        <section class="factor-overview">
+
+            <div id="factorIcons" class="factors">
+
+                <img src="images/NA_Factor_1.png" alt="Block">
+
+                <img src="images/NA_Factor_2.png" alt="High Density">
+
+                <img src="images/NA_Factor_3.png" alt="Curve">
+
+                <img src="images/NA_Factor_4.png" alt="Wood">
+
+                <img src="images/NA_Factor_5.png" alt="Local Energy">
+
+                <img src="images/NA_Factor_6.png" alt="30 kWh">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Factor Overview Button -->
+
+        <button
+            id="factorOverviewButton"
+            class="factor-overview-button">
+
+            <img
+                class="factor-info-icon"
+                src="./SVGS/factor_icon.svg"
+                alt=""
+                aria-hidden="true">
+
+            <span class="factor-overview-trigger-label">
+                Factor Overview
+            </span>
+
+        </button>
+
+        </aside>
+
+
+<!-- ===================================================== -->
+<!-- FACTOR OVERVIEW POPUP                                 --> 
+<!-- ===================================================== -->
+
+<div
+    id="factorOverviewModal"
+    class="factor-modal">
+
+    <div class="factor-modal-content">
+
+        <!-- Close -->
+        <button
+            id="factorModalClose"
+            class="factor-modal-close"
+            aria-label="Close">
+            ×
+        </button>
+
+
+        <!-- Header -->
+        <div class="factor-modal-header">
+
+            <h2>
+                <strong>Factor</strong> Overview
+            </h2>
+
+        </div>
+
+
+        <!-- Scrollable content -->
+        <div class="factor-modal-body">
+
+
+            <!-- BUILDING TYPE -->
+
+            <section class="factor-section">
+
+                <!-- Upper icon row -->
+                <div class="factor-icons">
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Block_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Line_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Point_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Row_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Duplex_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Single_icon.png"
+                            alt="">
+                    </div>
+
+                </div>
+
+
+                <!-- Lower icon row -->
+                <div class="factor-label-icons">
+
+                    <img
+                        src="images/Block_text_icon.png"
+                        alt="Block">
+
+                    <img
+                        src="images/Line_text_icon.png"
+                        alt="Line">
+
+                    <img
+                        src="images/Point_text_icon.png"
+                        alt="Point">
+
+                    <img
+                        src="images/Row_text_icon.png"
+                        alt="Row">
+
+                    <img
+                        src="images/Duplex_text_icon.png"
+                        alt="Duplex">
+
+                    <img
+                        src="images/Single_text_icon.png"
+                        alt="Single">
+
+                </div>
+
+                <!-- Description -->
+                <p>
+                    The <strong>Building type</strong> factor
+                    describes the configuration of residential
+                    units and the overall building volume.
+                </p>
+
+            </section>
+
+
+            <!-- DENSITY -->
+
+            <section class="factor-section">
+
+                <!-- Upper icon row -->
+                <div class="factor-icons">
+
+                    <div class="factor-item">
+                        <img
+                            src="images/High_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Medium_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Low_icon.png"
+                            alt="">
+                    </div>
+
+                </div>
+
+
+                <!-- Lower icon row -->
+                <div class="factor-label-icons">
+
+                    <img
+                        src="images/High_text_icon.png"
+                        alt="High">
+
+                    <img
+                        src="images/Medium_text_icon.png"
+                        alt="Medium">
+
+                    <img
+                        src="images/Low_text_icon.png"
+                        alt="Low">
+
+                </div>
+
+                <!-- Description -->
+                <p>
+                    The <strong>Density</strong> factor describes
+                    the number of buildings and storeys within a
+                    defined settlement unit. Together with the
+                    Building Type factor, it defines the spatial
+                    structure of the urban layout.
+                </p>
+
+            </section>
+
+
+            <!-- ROAD LAYOUT -->
+
+            <section class="factor-section">
+
+                <!-- Upper icon row -->
+                <div class="factor-icons">
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Grid_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Curve_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/CulDeSac_icon.png"
+                            alt="">
+                    </div>
+
+                </div>
+
+
+                <!-- Lower icon row -->
+                <div class="factor-label-icons">
+
+                    <img
+                        src="images/Grid_text_icon.png"
+                        alt="Grid">
+
+                    <img
+                        src="images/Curve_text_icon.png"
+                        alt="Curve">
+
+                    <img
+                        src="images/CulDeSac_text_icon.png"
+                        alt="Cul-de-sac">
+
+                </div>
+
+                <!-- Description -->
+                <p>
+                    The <strong>Road layout</strong> factor
+                    includes three configurations: grid, curved
+                    roads, and cul-de-sacs, representing common
+                    street network patterns across different
+                    urban forms.
+                </p>
+
+            </section>
+
+
+            <!-- CONSTRUCTION METHOD -->
+
+            <section class="factor-section">
+
+                <!-- Upper icon row -->
+                <div class="factor-icons">
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Mineral_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/Wood_icon.png"
+                            alt="">
+                    </div>
+
+                </div>
+
+
+                <!-- Lower icon row -->
+                <div class="factor-label-icons">
+
+                    <img
+                        src="images/Mineral_text_icon.png"
+                        alt="Mineral">
+
+                    <img
+                        src="images/Wood_text_icon.png"
+                        alt="Wood">
+
+                </div>
+
+                <!-- Description -->
+                <p>
+                    The <strong>Construction method</strong> factor
+                    distinguishes between timber and mineral construction, 
+                    representing two common structural systems.
+                </p>
+
+            </section>
+
+
+            <!-- HEAT SUPPLY -->
+
+            <section class="factor-section">
+
+                <!-- Upper icon row -->
+                <div class="factor-icons">
+
+                    <div class="factor-item">
+                        <img
+                            src="images/NaturalGas_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/LocalEnergy_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/HeatPump_icon.png"
+                            alt="">
+                    </div>
+
+                </div>
+
+
+                <!-- Lower icon row -->
+                <div class="factor-label-icons">
+
+                    <img
+                        src="images/NaturalGas_text_icon.png"
+                        alt="Natural Gas">
+
+                    <img
+                        src="images/LocalEnergy_text_icon.png"
+                        alt="Local Energy">
+
+                    <img
+                        src="images/HeatPump_text_icon.png"
+                        alt="Heat Pump">
+
+                </div>
+
+                <!-- Description -->
+                <p>
+                    The <strong>Heat supply</strong> factor
+                    includes natural gas, local energy systems, 
+                    and heat pumps. It covers the provision of 
+                    thermal energy for space heating and domestic 
+                    hot water, including generation, distribution, 
+                    and transfer.
+                </p>
+
+            </section>
+
+
+            <!-- ENERGY EFFICIENCY LEVEL -->
+
+            <section class="factor-section">
+
+                <!-- Upper icon row -->
+                <div class="factor-icons">
+
+                    <div class="factor-item">
+                        <img
+                            src="images/70_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/30_icon.png"
+                            alt="">
+                    </div>
+
+                    <div class="factor-item">
+                        <img
+                            src="images/15_icon.png"
+                            alt="">
+                    </div>
+
+                </div>
+
+
+                <!-- Lower icon row -->
+                <div class="factor-label-icons">
+
+                    <img
+                        src="images/70_text_icon.png"
+                        alt="70 kWh/m²">
+
+                    <img
+                        src="images/30_text_icon.png"
+                        alt="30 kWh/m²">
+
+                    <img
+                        src="images/15_text_icon.png"
+                        alt="15 kWh/m²">
+
+                </div>
+
+                <!-- Description -->
+                <p>
+                    The <strong>Energy efficiency level</strong>
+                    factor describes the annual heating demand per 
+                    square metre of usable floor area 
+                    (kWh/m² usable floor area *a).
+                </p>
+
+            
+            </section>
+
+
+        </div> <!-- .factor-modal-body -->
+
+    </div> <!-- .factor-modal-content -->
+
+</div> <!-- #factorOverviewModal -->
+
+
+<!-- ================================================= -->
+<!-- RIGHT COLUMN                                      -->
+<!-- ================================================= -->
+
+<main class="right-column">
+
+    <!-- ============================================= -->
+    <!-- NEIGHBOURHOOD IMAGE                           -->
+    <!-- ============================================= -->
+
+
+    <section class="neighbourhood">
+
+    <div class="neighbourhood-image-container">
+
+        <img
+        id="neighbourhoodImage"
+        class="neighbourhood-image"
+        src="images/NA_PP.png"
+        alt="Neighbourhood">
+
+    </div>
+
+    </section>
+
+
+
+    <!-- ============================================= -->
+    <!-- PRIVATE PARKING                               -->
+    <!-- ============================================= -->
+
+    <div class="parking-control">
+
+        <div class="parking-title">
+            Include<br>
+            Private Parking
+        </div>
+
+        <div class="parking-toggle">
+
+            <button
+                id="parkingYes"
+                class="parking-button active">
+                Yes
+            </button>
+
+            <button
+                id="parkingNo"
+                class="parking-button">
+                No
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================================= -->
+    <!-- CHANGE TO NEIGHBOURHOOD BUTTON                -->
+    <!-- ============================================= -->
+
+    <div
+        id="changeNeighbourhood"
+        class="change-neighbourhood to-B">
+
+        <span>
+            Change to<br>
+            <strong>Neighbourhood B</strong>
+        </span>
+
+        <button class="arrow-button">›</button>
+
+    </div>
+
+
+    <!-- ============================================= -->
+    <!-- BOTTOM CHART                                  -->
+    <!-- ============================================= -->
+
+    <section class="bottom-chart">
+
+        <div id="percentChart"></div>
+
+    </section>
+
+</main>
+
+</div>
+
+</body>
+
+</html>
