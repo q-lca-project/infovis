@@ -1,13 +1,9 @@
-# qlca-neighbourhoods
+# qlca-project
 
-The Quarter Life Cycle Assessment (Q-LCA) project explores how urban design decisions influence the climate impact of residential neighbourhoods over their entire life cycle.
+This information visualization project presents an interactive exploration of the Quarter Life Cycle Assessment (Q-LCA) model, which examines how urban design decisions influence the climate impact of residential neighbourhoods. Developed during the summer semester of 2026 as part of the seminar “Visualizing Sustainability Models”, supervised by Dr. Francesca Morini and Erik Weiss at the University of Applied Sciences Potsdam, the project translates the Q-LCA data and research findings into an interactive scrollytelling experience.
 
-While conventional life cycle assessments typically focus on individual buildings, Q-LCA extends the assessment to the neighbourhood scale by including both buildings and technical infrastructure. Using a modular LCA-based model, the underlying study combines six key factors to compare 972 settlement scenarios.
-
-The results demonstrate that neighbourhood-scale CO₂-Emissions are shaped by the interaction of multiple planning decisions rather than by individual buildings alone. By making these relationships visible, Q-LCA supports planners and decision-makers in evaluating design alternatives during the early stages of urban development.
-
-The scrollytelling website presents an interactive exploration of the Q-LCA model.
+A project by Claudia Keuß and Michelle Otiji.
 
 Further information
-*  Research reports
+*  References
 *  Data source
