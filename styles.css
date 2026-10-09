@@ -959,17 +959,17 @@ body {
 			display: block;
 			width: 100%;
 			height: auto;
-
+			/* Set the zoom origin to the left edge */
 			transform-origin: left center;
 
-			/* Ausgangszustand */
+			/* Initial state */
 			transform: translateX(0) scale(2);
-
+			/* Zoom transition */
 			transition:
 				transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 		}
 
-
+		/* Initial positioning and scaling */
 		#model-5 .factor-panel__cases img {
 			transform-origin: left center;
 			transform: translate(-33.4%, 5%) scale(3.3);
