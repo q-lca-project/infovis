@@ -4,7 +4,7 @@ This information visualization project explores the Quarter Life Cycle Assessmen
 
 A project by Claudia Keuß and Michelle Otiji.
 
-[View project](q-lca-project.github.io/infovis/)
+[View project](https://q-lca-project.github.io/infovis/)
 
 
 ## References
