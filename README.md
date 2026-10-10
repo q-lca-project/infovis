@@ -4,6 +4,9 @@ This information visualization project explores the Quarter Life Cycle Assessmen
 
 A project by Claudia Keuß and Michelle Otiji.
 
+[View project](q-lca-project.github.io/infovis/)
+
+
 ## References
 
 1. Prytula, M.; Rieniets, T.; Rosenberger, J.; Hack, J.; Stallmann, L.; Gebhardt, N. (2025). Q-LCA: Analyse der ökologischen Auswirkungen unterschiedlicher Siedlungstypen in Neubauquartieren über ihren Lebenszyklus. BBSR-Online-Publikation 51/2025. Bonn. https://doi.org/10.58007/f371-1157
